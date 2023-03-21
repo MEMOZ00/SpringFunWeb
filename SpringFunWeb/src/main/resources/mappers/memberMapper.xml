@@ -36,6 +36,20 @@
 		select * from members
 	</select>
 	
+	<resultMap type="map" id="memberMap">
+		<!-- column="DB의 열이름" property="해당 DB열에 대해 저장한 변수이름" DB컬럼명 및 DTO의 멤버변수 명과 일치 -->
+		<id column="id" property="memberId" />
+		<result column="pass" property="memberPass"/>
+		<result column="name" property="memberName"/>
+		<result column="date" property="memberDate"/>
+	</resultMap>
+	
+	<select id="getMemberListMap" resultMap="memberMap">
+		select id, pass, name, date from members
+	</select>
+	
+	
+	
 <!-- 	<select id="selectBlog" parameterType="int" resultType="Blog">
         select * from Blog where id = #{id}
     </select>

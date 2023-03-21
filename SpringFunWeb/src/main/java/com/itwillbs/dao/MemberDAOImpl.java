@@ -2,6 +2,7 @@ package com.itwillbs.dao;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -79,5 +80,12 @@ public class MemberDAOImpl implements MemberDAO{
 		// .insert(sql구문이름, ?표에입력될 변수명)
 		return sqlSession.selectList(namespace+".getMemberList"); 
 	}
+	
+	@Override
+	public List<Map<String, Object>> getMemberListMap() {
+		System.out.println("MemberDAOImpl getMemberListMap()");
+		
+		return sqlSession.selectList(namespace+".getMemberListMap");
+	};
 	
 }// class

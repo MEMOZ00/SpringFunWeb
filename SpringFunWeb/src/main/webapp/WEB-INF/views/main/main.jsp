@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="css/default.css" rel="stylesheet" type="text/css">
-<link href="css/front.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/front.css" rel="stylesheet" type="text/css">
 
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
@@ -23,7 +23,7 @@
 
  </script>
  <![endif]--> 
-<script type="text/javascript" src="script/jquery-3.6.3.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 //jQuery 준비 => 대상.함수()
 	$(document).ready(function(){
@@ -86,7 +86,7 @@
 <!-- 헤더파일들어가는 곳 -->
 <!-- 메인이미지 들어가는곳 -->
 <div class="clear"></div>
-<div id="main_img"><img src="images/main_img.jpg"
+<div id="main_img"><img src="${pageContext.request.contextPath }/resources/images/main_img.jpg"
  width="971" height="282"></div>
 <!-- 메인이미지 들어가는곳 -->
 <!-- 메인 콘텐츠 들어가는 곳 -->

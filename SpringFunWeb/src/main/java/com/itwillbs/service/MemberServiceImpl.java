@@ -1,6 +1,7 @@
 package com.itwillbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -80,5 +81,12 @@ public class MemberServiceImpl implements MemberService{
 		// MemberDAO memberDAO = new MemberDAOImpl(); 
 		return memberDAO.getMemberList();
 	}
+	
+	@Override
+	public List<Map<String, Object>> getMemberListMap() {
+		System.out.println("MemberServiceImpl getMemberListMap()");
+		
+		return memberDAO.getMemberListMap();
+	};
 	
 }// class

@@ -1,6 +1,7 @@
 package com.itwillbs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ui.Model;
 
@@ -21,4 +22,5 @@ public interface MemberDAO {
 	
 	public List<MemberDTO> getMemberList();
 	
+	public List<Map<String, Object>> getMemberListMap(); 
 }// class

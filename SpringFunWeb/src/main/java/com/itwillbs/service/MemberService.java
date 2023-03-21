@@ -1,15 +1,13 @@
 package com.itwillbs.service;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.ui.Model;
-
-import com.itwillbs.dao.MemberDAO;
 import com.itwillbs.domain.MemberDTO;
 
 public interface MemberService {
 	// 클래스 만들기 위한 부모 인터페이스 틀
-	// 추상메서드 틀 정의
+	// 추상메서드 틀 정의   
 	public void insertMember(MemberDTO memberDTO);
 	
 	public MemberDTO userCheck(MemberDTO memberDTO);
@@ -21,4 +19,6 @@ public interface MemberService {
 	public void deleteMember(MemberDTO memberDTO);
 	
 	public List<MemberDTO> getMemberList();
+	
+	public List<Map<String, Object>> getMemberListMap(); 
 }

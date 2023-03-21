@@ -97,14 +97,16 @@
 			// 페이지 이동없이 디비에 가서 아이디 중복체크해서 결과를 가져와서 출력
 			// idCheck.jsp
 			$.ajax({
-				url:'MemberIdCheck.me',
+				url:'${pageContext.request.contextPath }/member/idCheck',
 				data:{'id':$('.id').val()},
 				success:function(result){
-// 					alert(result);
+					// alert(result);
 					// result.trim() => 결과값 앞뒤로 공백 제거
-					if(result.trim()=="아이디 중복"){
+					if(result.trim()=="iddup"){
+						result = "아이디 중복";
 						$('.divresult').html(result).css("color","red");
 					}else{
+						result = "아이디 사용가능";
 						$('.divresult').html(result).css("color","blue");
 					}
 				}
