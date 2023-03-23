@@ -1,18 +1,20 @@
 package com.itwillbs.domain;
 
 public class PageDTO {
-	private int pageSize;
-	private String pageNum;
+	// DB 쿼리문 사용 멤버변수
+	private int CurrentPage; // pageNum int 형변환
+	private int startRow; // 테이블에서 가져올 시작 글번호
+	private int endRow; // 시작 글번호에서 가져올 글 개수
 	
-	private int CurrentPage;
-	private int startRow;
-	private int endRow;
+	// 페이징처리 계산 멤버변수
+	private int pageSize; // 화면에 보여줄 글의 개수
+	private String pageNum; // 페이지번호
 	
-	private int pageBlock;
-	private int startPage;
-	private int endPage;
-	private int count;
-	private int pageCount;
+	private int pageBlock; // 나타낼 페이징 개수
+	private int startPage; // 페이징 시작 번호
+	private int endPage; // 페이징 끝 번호
+	private int count; // 게시판의 모든 글 개수
+	private int pageCount; // 총 페이징 개수
 	
 	
 	public int getCount() {

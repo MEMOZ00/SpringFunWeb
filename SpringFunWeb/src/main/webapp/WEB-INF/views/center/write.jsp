@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="css/default.css" rel="stylesheet" type="text/css">
-<link href="css/subpage.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/subpage.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/ie7-squish.js" type="text/javascript"></script>
@@ -50,10 +50,10 @@
 <%
 String id=(String)session.getAttribute("id");
 %>
-<form action="BoardWritePro.bo" method="post">
+<form action="${pageContext.request.contextPath }/board/writePro" method="post">
 <table id="notice">
    <tr><td>글쓴이</td>
-       <td><input type="text" name="name" value="<%=id %>" readonly></td></tr>
+       <td><input type="text" name="name" value="${sessionScope.id }" readonly></td></tr>
    <tr><td>글제목</td>
        <td><input type="text" name="subject" ></td></tr>
    <tr><td>글내용</td>

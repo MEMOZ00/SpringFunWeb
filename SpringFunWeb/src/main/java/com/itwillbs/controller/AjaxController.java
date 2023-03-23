@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.service.MemberService;
 
+
+// rest api controlloer
 @RestController
 public class AjaxController {
 	
@@ -27,13 +29,13 @@ public class AjaxController {
 		String id = request.getParameter("id");
 		// DB 아이디 중복체크
 		MemberDTO memberDTO = memberService.getMember(id);
-		// 한글은 깨지므로 영문 result에 영문 사용
+		// 한글은 호환이 어려우므로 결과값은 영문 result에 영문 사용
 		if(memberDTO != null) {
 			result = "iddup";
 		} else {
 			result = "idok";
 		}
-		// 출력 결과 저장 
+		// 서버에서 처리한 출력 결과 저장 
 		ResponseEntity<String> entity = new ResponseEntity<String>(result, HttpStatus.OK);
 	 return entity;
 	}
