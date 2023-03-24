@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -50,9 +51,11 @@ public class BoardController {
 	public String list(HttpServletRequest request, PageDTO pageDTO, Model model) {
 		System.out.println("BoardController list()");
 		// 처리작업
+		// 검색어 가져오기 
+		String search= request.getParameter("search");
 		
 		//한 화면에 보여줄 글의 개수
-		int pageSize = 10;
+		int pageSize = 5;
 		
 		//현재페이지 번호 설정
 		String pageNum= request.getParameter("pageNum");
@@ -64,12 +67,13 @@ public class BoardController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(CurrentPage);
+		pageDTO.setSearch(search);
 		
 		List<BoardDTO> boardList = boardService.getBoardList(pageDTO);
 		
 		//페이징 처리
-		int count = boardService.getBoardCount();
-		int pageBlock = 10;
+		int count = boardService.getBoardCount(pageDTO);
+		int pageBlock = 5;
 		int startPage = (CurrentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
 		int pageCount=count/pageSize+(count%pageSize==0?0:1);
@@ -92,10 +96,47 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/board/content", method = RequestMethod.GET)
-	public String content() {
+	public String content(HttpServletRequest request, Model model) {
 		System.out.println("BoardController content()");
+		int num = Integer.parseInt(request.getParameter("num"));
 		
-		return null;
+		BoardDTO boardDTO = boardService.getBoard(num);
+		
+		model.addAttribute("boardDTO",boardDTO);
+		
+		return "center/content";
 	}
+	
+	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
+	public String update(HttpServletRequest request, Model model) {
+		System.out.println("BoardController update()");
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		BoardDTO boardDTO = boardService.getBoard(num);
+		
+		model.addAttribute("boardDTO",boardDTO);
+		
+		return "center/update";
+	}
+	
+	@RequestMapping(value = "/board/updatePro", method = RequestMethod.POST)
+	public String updatePro(BoardDTO boardDTO) {
+		System.out.println("BoardController updatePro()");
+		
+		boardService.updateBoard(boardDTO);
+		
+		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value = "/board/delete", method = RequestMethod.GET)
+	public String delete(HttpServletRequest request, Model model) {
+		System.out.println("BoardController delete()");
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		boardService.deleteBoard(num);
+		
+		return "redirect:/board/list";
+	}
+	
 	
 }//class

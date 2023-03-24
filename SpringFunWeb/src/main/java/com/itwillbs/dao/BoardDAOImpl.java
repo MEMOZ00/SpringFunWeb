@@ -44,10 +44,10 @@ public class BoardDAOImpl implements BoardDAO{
 	} 
 	
 	@Override
-	public int getBoardCount() {
+	public int getBoardCount(PageDTO pageDTO) {
 		System.out.println("BoardDAOImpl getBoardCount()");
 		
-		return sqlSession.selectOne(namespace+".getBoardCount");
+		return sqlSession.selectOne(namespace+".getBoardCount", pageDTO);
 	} 
 	
 	@Override

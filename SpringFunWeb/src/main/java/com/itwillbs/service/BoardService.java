@@ -11,7 +11,7 @@ public interface BoardService {
 	
 	public List<BoardDTO> getBoardList(PageDTO pageDTO);
 	
-	public int getBoardCount();
+	public int getBoardCount(PageDTO pageDTO);
 	
 	public BoardDTO getBoard(int num);
 	

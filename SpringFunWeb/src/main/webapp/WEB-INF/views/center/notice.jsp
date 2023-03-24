@@ -60,10 +60,10 @@
     <th class="tread">Read</th></tr>
     
  <c:forEach var="dto" items="${boardList}">
-  	<tr onclick="location.href='BoardContent.bo?num=${dto.num}'">
+  	<tr onclick="location.href='${pageContext.request.contextPath }/board/content?num=${dto.num}'">
  	<td>${dto.num}</td>
     <td class="left">
-   <%--  <c:if test="${dto.re_lev > 0 }">
+    <%-- <c:if test="${dto.re_lev > 0 }">
     	<c:set var="wid" value="${dto.re_lev * 10 }"></c:set>
     	<img src="${pageContext.request.contextPath }/resources/images/center/level.gif" width="${wid }" height="15"> 
      	<img src="${pageContext.request.contextPath }/resources/images/center/re.gif">
@@ -100,21 +100,15 @@
 </table>
 
 <div id="table_search">
-<%
-String id=(String)session.getAttribute("id");
 
-if(id!=null){
-	%>
-	<input type="button" value="글쓰기" class="btn" 
-onclick="location.href='BoardWriteForm.bo'">
-	<%
-}
-%>
+	<c:if test="${! empty sessionScope.id }">
+		<input type="button" value="글쓰기" class="btn" onclick="location.href='${pageContext.request.contextPath }/board/write'">
+	</c:if>
 
 </div>
 
 <div id="table_search">
-<form action="BoardList.bo" method="post">
+<form action="${pageContext.request.contextPath }/board/list" method="get">
 <input type="text" name="search" class="input_box">
 <input type="submit" value="search" class="btn">
 </form>
@@ -130,7 +124,7 @@ onclick="location.href='BoardWriteForm.bo'">
 //	if(startPage > pageBlock){
 		%>
 	<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-		<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">[10페이지 이전]</a>
+		<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage-pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
 	</c:if>
 		<%
 //	}
@@ -138,7 +132,7 @@ onclick="location.href='BoardWriteForm.bo'">
 //	for(int i=startPage;i<=endPage;i++){
 		%>
 	<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-		<a href="${pageContext.request.contextPath}/board/list?pageNum=${i}">${i}</a> 
+		<a href="${pageContext.request.contextPath}/board/list?pageNum=${i}&search=${pageDTO.search}">${i}</a> 
 	</c:forEach> 
 		<%
 //	}
@@ -147,7 +141,7 @@ onclick="location.href='BoardWriteForm.bo'">
 //	if(endPage < pageCount){
 		%>
 	<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-		<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">[10페이지 다음]</a>
+		<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage+pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
 	</c:if>
 		<%
 //	}
