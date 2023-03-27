@@ -26,57 +26,29 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 //jQuery 준비 => 대상.함수()
-	$(document).ready(function(){
-// 		alert("준비");
-		// class="brown" 클릭했을때  "클릭"
+//			        반복해서 출력 .each()
+//		 				alert(index);
+//		 				alert(item.subject);
+//		 				alert(item.date);
+//		                태그 뒤부분에 추가해서 넣기 append()
+	$(document).ready(function(){ // j쿼리 start
 		$('.brown').click(function(){
-// 			alert("클릭");
-//         xml <= 디비에서 가져옴
-// <board>
-// 	<tr><subject>제목1</subject><date>2023-01-01</date></tr>
-// 	<tr><subject>제목2</subject><date>2023-01-02</date></tr>
-// 	<tr><subject>제목3</subject><date>2023-01-03</date></tr>
-// </board>
-
-//         자바스크립트 배열(json) <= 디비에서 가져옴
-// JSON ( 제이슨 , JavaScript Object Notation )
-// 			var arr=[
-// 				     {"subject":"제목1","date":"2023-01-01"},
-// 				     {"subject":"제목2","date":"2023-01-02"},
-// 				     {"subject":"제목3","date":"2023-01-03"}
-// 				    ];
-
-// [{"date":"2023.02.01","subject":"제목13","num":13},
-// 	{"date":"2023.02.01","subject":"제목12","num":12},
-// 	{"date":"2023.02.01","subject":"제목11","num":11},
-// 	{"date":"2023.02.01","subject":"제목10","num":10},
-// 	{"date":"2023.02.01","subject":"제목9","num":9}]
-			
+			alert("클릭");
 			//초기화
 			$('table').html('');
 			
 			$.ajax({
-				url:'BoardJson.bo',
+				url:'${pageContext.request.contextPath }/board/listjson',
 				dataType:'json',
 				success:function(arr){
-					
-//			        반복해서 출력 .each()
 					$.each(arr,function(index,item){
-//		 				alert(index);
-//		 				alert(item.subject);
-//		 				alert(item.date);
-//		               태그 뒤부분에 추가해서 넣기 append()
 						$('table').append('<tr><td class="contxt"><a href="#">'+item.subject+'</a></td><td>'+item.date+'</td></tr>');
 					});
-					
 				}
 			});
 
-
-
-
 		});
-	});
+	}); // j쿼리 end
 </script>
 </head>
 <body>

@@ -1,5 +1,7 @@
 package com.itwillbs.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwillbs.domain.BoardDTO;
 import com.itwillbs.domain.MemberDTO;
+import com.itwillbs.domain.PageDTO;
+import com.itwillbs.service.BoardService;
 import com.itwillbs.service.MemberService;
 
 
@@ -21,6 +26,9 @@ public class AjaxController {
 	
 	@Inject
 	private MemberService memberService;
+	
+	@Inject
+	private BoardService boardService;
 	
 	@RequestMapping(value = "/member/idCheck", method = RequestMethod.GET)
 	public ResponseEntity<String> idCheck(HttpServletRequest request) {
@@ -37,7 +45,25 @@ public class AjaxController {
 		}
 		// 서버에서 처리한 출력 결과 저장 
 		ResponseEntity<String> entity = new ResponseEntity<String>(result, HttpStatus.OK);
-	 return entity;
+		return entity;
+	}
+	
+	@RequestMapping(value = "/board/listjson", method = RequestMethod.GET)
+	public ResponseEntity<List<BoardDTO>> listjson() {
+		// DB 최근글 5개 가져오기
+		PageDTO pageDTO = new PageDTO();
+		
+		pageDTO.setPageSize(5);
+		pageDTO.setPageNum("1");
+		pageDTO.setCurrentPage(1);
+		
+		List<BoardDTO> boardList = boardService.getBoardList(pageDTO);
+		
+		// 서버에서 처리한 출력 결과 저장 
+		ResponseEntity<List<BoardDTO>> entity = new ResponseEntity<List<BoardDTO>>(boardList, HttpStatus.OK);
+		// List<BoardDTO> -> json date형으로 변경
+		// jackson-databind 프로그램 설치 시 자동으로 변환 가능
+		return entity;
 	}
 	
 }// class

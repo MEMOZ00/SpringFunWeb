@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/subpage.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/subpage.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/ie7-squish.js" type="text/javascript"></script>
@@ -46,21 +46,34 @@
 
 <!-- 게시판 -->
 <article>
-<h1>Notice Write</h1>
+<h1>Notice Update</h1>
 <%
-String id=(String)session.getAttribute("id");
+//String id=(String)session.getAttribute("id");
+//BoardDTO dto=(BoardDTO)request.getAttribute("dto");
 %>
-<form action="${pageContext.request.contextPath }/board/writePro" method="post">
+<form action="${pageContext.request.contextPath}/board/fupdatePro" method="post" enctype="multipart/form-data">
+<input type="hidden" name="num" value="${boardDTO.num }">
 <table id="notice">
-   <tr><td>글쓴이</td>
-       <td><input type="text" name="name" value="${sessionScope.id }" readonly></td></tr>
-   <tr><td>글제목</td>
-       <td><input type="text" name="subject" ></td></tr>
-   <tr><td>글내용</td>
-<td><textarea name="content" rows="10" cols="20"></textarea></td></tr>              
+   <tr>
+   <td>글쓴이</td>
+   <td><input type="text" name="name" value="${boardDTO.name }" readonly></td>
+   </tr>
+   <tr>
+   <td>글제목</td>
+   <td><input type="text" name="subject" value="${boardDTO.subject }"></td>
+   </tr>
+   <tr>
+   <td>글내용</td>
+   <td><textarea name="content" rows="10" cols="20">${boardDTO.content }</textarea></td>
+   </tr>  
+   <tr> 
+   <td>첨부파일</td>
+   <td><input type="file" name="file"><br>${boardDTO.file }<br><img alt="" src="${pageContext.request.contextPath}/resources/upload/${boardDTO.file }">
+   <input type="hidden" name="oldfile" value="${boardDTO.file }"></td>
+   </tr>            
 </table>
 <div id="table_search">
-<input type="submit" value="글쓰기" class="btn">
+<input type="submit" value="글수정" class="btn">
 </div>
 </form>
 
